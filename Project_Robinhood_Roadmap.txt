@@ -1,0 +1,71 @@
+Project Robinhood - Development Roadmap and Planning
+====================================================
+
+Overview:
+---------
+Project Robinhood is a Python 3-based interactive arcade-style target system.
+It uses recycled mechanical keyboard switches as hit sensors, connected via GPIO
+to a Raspberry Pi Zero W. The project supports RGB feedback, multiple game modes,
+and aims to support expansion into a multi-target networked setup.
+
+Primary Use Case:
+-----------------
+- Nerf-style competitive target game
+- Real-time scoring
+- Visual feedback per hit
+- Modular and expandable
+
+Phase 1: Core System Planning & Proof of Concept
+------------------------------------------------
+[ ] Finalize hardware selection:
+    - GPIO expander (MCP23017)
+    - Addressable RGB LEDs (WS2812)
+[ ] Define GPIO allocation (I2C, LED, control pins)
+[ ] Create system interaction diagram (targets → GPIO → Pi → LED → score)
+[ ] Implement one target-to-LED proof of concept
+[ ] Establish MemoryUnit continuity logging system
+
+Phase 2: Input and Output Architecture
+--------------------------------------
+[ ] Implement I2C GPIO expander controller (MCP23017)
+[ ] Implement RGB LED controller (e.g., rpi_ws281x)
+[ ] Map input targets to LED output and zones
+[ ] Enable debounce logic and interrupt or polling model
+
+Phase 3: Game Mode Engine
+-------------------------
+[ ] Define GameMode class structure (start, update, score)
+[ ] Build initial game modes:
+    - AccuracyMode (one valid target at a time)
+    - SpeedMode (rapid fire, score as many as possible)
+[ ] Implement score tracking, real-time updates
+
+Phase 4: Expansion and UX Enhancements
+--------------------------------------
+[ ] Enable multi-target Pi sync (via I2C or LAN)
+[ ] Add sound/speaker output through Pi audio
+[ ] Design Web dashboard or mobile scoreboard
+[ ] Config file system for runtime parameters
+
+Phase 5: Multi-User, Multi-AI Development Sync
+----------------------------------------------
+[ ] Expand readme_MemoryUnit.md to support co-dev logs
+[ ] Assign MemoryUnit_A to Wy, MemoryUnit_B to friend
+[ ] Use Consensus: and MergeRequest: tags to track decisions
+[ ] Validate MemoryUnit logs and meta hash after each milestone
+
+Design Hurdles and Considerations:
+----------------------------------
+- GPIO limitations: Only ~26 usable GPIO on Pi Zero W, overcome with MCP23017
+- Voltage level shifting: ensure safe levels for both switch input and LED signal
+- Power draw for RGB LEDs: large LED arrays need external 5V power with proper grounding
+- Interrupt timing: rapid hits could cause bounce or miss events if not handled cleanly
+- Physical enclosure: ensure the target system is safe, responsive, and mountable
+- RGB wiring: WS2812 signal quality requires careful routing and resistor on data line
+- Game mode sync: multi-Pi systems must have accurate timing coordination
+
+Notes:
+------
+All development is tracked via `docs/readme_MemoryUnit.md`.
+This file ensures the project can be resumed, restored, or co-developed with continuity.
+
