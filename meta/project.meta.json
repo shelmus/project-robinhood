@@ -1,0 +1,8 @@
+{
+  "project_name": "Project Robinhood",
+  "version": "0.1.0",
+  "status": "init",
+  "last_modified": "2025-05-23",
+  "ai_units": ["MemoryUnit_A", "MemoryUnit_B"],
+  "integrity_checks": []
+}
